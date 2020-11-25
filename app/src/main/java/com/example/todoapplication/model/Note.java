@@ -9,19 +9,19 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Note implements Parcelable {
-// Realizacja interfejsa Parcelable zeby byla mozliwosc oddawac Note miedzy Activity
+// Realizacja interfejsa Parcelable dla mozliwości oddawania Note między Activity
 
-    @PrimaryKey(autoGenerate = true) // Unikatowy klucz ktory sam generuje
-    public int uid; // Specyjalny ID(klucz unikatowy)
+    @PrimaryKey(autoGenerate = true) // Unikatowy klucz (ID) który sam generuje się
+    public int uid; // Specyjalny ID
 
-    @ColumnInfo(name = "text") // Nazw kolumn w bazie danych w ktorej beda lezacz(save) pola
+    @ColumnInfo(name = "text") // Nazwy kolumn w bazie danych w których będą leżać pola
     public String text; // Text Notatkow
 
-    @ColumnInfo(name = "timestamp") // Czas kiedy byl stworzony Notatek
+    @ColumnInfo(name = "timestamp") // Czas kiedy był stwórzony Notatek
     public long timestamp;
 
     @ColumnInfo(name = "done")
-    public boolean done; // Zakonczono dzielo lub nie
+    public boolean done; // Zakonczono dzieło lub nie
 
     public Note() {
     }
