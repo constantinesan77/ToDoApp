@@ -44,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        // Umieszczenie listy z dolu do gory
+        // Umieszczenie listy z dolu do góry
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         Adapter adapter = new Adapter();
         recyclerView.setAdapter(adapter);
 
-        FloatingActionButton fab = findViewById(R.id.fab); // Button w prawym rogu
+        FloatingActionButton fab = findViewById(R.id.fab); // Przycisk w prawym dolnym rogu
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
