@@ -16,9 +16,9 @@ public class App extends Application {
     public static App getInstance() { // Singleton
         return instance;
     }
-// Otrzymujemy dostep do aplikacji i modelow z jakiego kolwiek miejsca w aplikacji
+// Otrzymujemy dostęp do aplikacji i modelów z jakiego kołwiek miejsca w aplikacji
 
-    @Override // Method onCreate ktory wywoluje przed startem aplikajci
+    @Override // Method onCreate który wywołuje przed startem aplikajci
     public void onCreate() {
         super.onCreate();
 
@@ -28,8 +28,8 @@ public class App extends Application {
                 AppDatabase.class, "app-db-name")
                 .allowMainThreadQueries()
                 .build();
-// Tworzenie Bazy Danych za pomoca Room
-        noteDao = database.noteDao(); // Otrzymujemy Dao po wywolaniu noteDao
+// Tworzenie Bazy Danych za pomocą Room
+        noteDao = database.noteDao(); // Otrzymujemy Dao po wywołaniu noteDao
     }
 
     public void setDatabase(AppDatabase database) {
