@@ -8,7 +8,7 @@ import com.example.todoapplication.model.Note;
 
 import java.util.List;
 
-// Dajemy dostep do danych o liscie naszych notatkow zeby wszystko bylo widac na ekranie glownym
+// Dajemy dostęp do danych o liście naszych Notatków żeby wszystko było widać na ekranie glównym
 public class MainViewModel extends ViewModel {
     private LiveData<List<Note>> noteLiveData = App.getInstance().getNoteDao().getAllLiveData();
 
