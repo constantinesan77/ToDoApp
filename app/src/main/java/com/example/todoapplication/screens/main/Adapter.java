@@ -28,49 +28,49 @@ public class Adapter extends RecyclerView.Adapter<Adapter.NoteViewHolder> {
     public Adapter() {
 
         sortedList = new SortedList<>(Note.class, new SortedList.Callback<Note>() {
-            // sortedList zamierzony dla automatycznych definowac zmiany wewnątrz siebie I wydawac komendy ktore zmienili sie
+            // sortedList zamierzony dla automatycznych definowań zmian wewnątrz siebie I wydawanie komend których zmienił się
             @Override
             public int compare(Note o1, Note o2) {
                 if (!o2.done && o1.done) {
-                    return 1; // Jezeli jeden z elementow nie jest zakonczony a drugi tak wtedy 1>2
+                    return 1; // Jeżeli jeden z elementów nie jest zakonczony, a drugi tak wtedy 1 elememnt > 2 elementa
                 }
                 if (o2.done && !o1.done) {
                     return -1;
                 }
-                return (int) (o2.timestamp - o1.timestamp); // Porownywanie w czasie stworzenia
+                return (int) (o2.timestamp - o1.timestamp); // Porównywanie w czasie stworzenia
             }
 
             @Override
             public void onChanged(int position, int count) {
-// Methoda ktora się wywoluje kiedy element zmiany sie w pozycji
+// Methoda ktora się wywoluje kiedy element zmiany jest w pozycji
                 notifyItemRangeChanged(position, count);
-// RecyclerView uzna się ze elementy zmienili sie i zmieni ich nie dotykajac inne elementy
+// RecyclerView uzna się że elementy zmieniłi sie i zmieni ich nie dotykając inne elementy
             }
 
             @Override
             public boolean areContentsTheSame(Note oldItem, Note newItem) {
-// Zwraca True jezeli 2 elementy rowny sie
+// Zwraca True jeżeli dwa elementy równy się
                 return oldItem.equals(newItem);
             }
 
             @Override
             public boolean areItemsTheSame(Note item1, Note item2) {
-// Zawartosc elementow moze byc rozna wewnątrz ale ID jest taki sam
-                return item1.uid == item2.uid; // Porownywanie po ID
+// Zawartość elementów mogą być różne wewnątrz, ale ID jest taki sam
+                return item1.uid == item2.uid; // Porównywanie po ID
             }
 
             @Override
-            public void onInserted(int position, int count) { // Mowi Adapterowie o zmianach
+            public void onInserted(int position, int count) { // Mówi Adapterowie o zmianach
                 notifyItemRangeInserted(position, count);
             }
 
             @Override
-            public void onRemoved(int position, int count) { // Mowi Adapterowie o zmianach
+            public void onRemoved(int position, int count) { // Mówi Adapterowie o zmianach
                 notifyItemRangeRemoved(position, count);
             }
 
             @Override
-            public void onMoved(int fromPosition, int toPosition) { // Mowi Adapterowie o zmianach
+            public void onMoved(int fromPosition, int toPosition) { // Mówi Adapterowie o zmianach
                 notifyItemMoved(fromPosition, toPosition);
             }
         });
@@ -85,27 +85,26 @@ public class Adapter extends RecyclerView.Adapter<Adapter.NoteViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
-        holder.bind(sortedList.get(position)); // Podpięcie k notatku
+        holder.bind(sortedList.get(position)); // Podpięcie do Notatku
     }
 
     @Override
     public int getItemCount() {
-        return sortedList.size(); // Ile w sotredList jest elementow
+        return sortedList.size(); // Ile w sotredList jest elementów
     }
 
     public void setItems(List<Note> notes) {
-        // Odswiezanie listy zawartosci Adaptera i zamienic nowe elementy
+        // Odświeżanie listy zawartości Adaptera i zamienianie ich na nowe elementy
         sortedList.replaceAll(notes);
     }
 
     static class NoteViewHolder extends RecyclerView.ViewHolder {
-// ViewHolder chronie się wszystkie linki na View żeby można bylo ich używac
-
+// ViewHolder przechowywuję wszystkie linki na View żeby można było z nich korzystać
         TextView noteText;
         CheckBox completed;
         View delete;
 
-        Note note; // Zachowamy notatek ktory w ten sam moment wyswietla danym elementem
+        Note note; // Zachowamy Notatek który w ten sam moment wyswietła się
 
         boolean silentUpdate;
 
@@ -117,7 +116,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.NoteViewHolder> {
             delete = itemView.findViewById(R.id.delete);
 
             itemView.setOnClickListener(new View.OnClickListener() {
-                //Po Item bedziemy wywolac Activity dla edytowania notatka
+                //Po Item będziemy wywołwyać Activity dla edytowania Notatka
                 @Override
                 public void onClick(View view) {
                     NoteDetailsActivity.start((Activity) itemView.getContext(), note);
@@ -142,13 +141,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.NoteViewHolder> {
                     updateStrokeOut();
                 }
             });
-// Jezeli nie silentUpdate to odswiezamy notatek, jezeli tak to zapisujemy zmiany notatka
+// Jeżeli nie silentUpdate to odswiezamy notatek, jeżeli tak to zapisujemy zmiany Notatka
         }
 
-        public void bind(Note note) { // Funkcja ktora wyswietla znaczenia pol notatkow na View
+        public void bind(Note note) { // Funkcja która wyswietła znaczenia pól Notatków na View
             this.note = note;
 
-            noteText.setText(note.text); // Text notatkow
+            noteText.setText(note.text); // Text notatków
             updateStrokeOut();
 
             silentUpdate = true;
@@ -156,13 +155,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.NoteViewHolder> {
             silentUpdate = false;
         }
 
-        private void updateStrokeOut() { // Funkcja ktora wykreslia zakonczone dzialo
+        private void updateStrokeOut() { // Funkcja która wykresłia zakonczone działo
             if (note.done) {
                 noteText.setPaintFlags(noteText.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             } else {
                 noteText.setPaintFlags(noteText.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
             }
-            // Jezeli notatek zakonczony to wykreslamy go
+            // Jeżeli Notatek zakończony, to wykreślamy go
         }
     }
 }
