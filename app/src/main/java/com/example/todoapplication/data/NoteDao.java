@@ -24,7 +24,7 @@ public interface NoteDao { // Tworzenie interfejsu
     LiveData<List<Note>> getAllLiveData();
 
     @Query("SELECT * FROM Note WHERE uid IN (:userIds)")
-        // Auto insert name
+        // Automatyczne wstawianie imienia
     List<Note> loadAllByIds(int[] userIds);
 
     @Query("SELECT * FROM Note WHERE uid = :uid LIMIT 1")
@@ -32,7 +32,7 @@ public interface NoteDao { // Tworzenie interfejsu
     Note findById(int uid);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-// Jezeli ja chce wstawic note w bd z id ktore juz istneje to odbedzie sie zamiana starego na nowy
+// Jeżeli chcę wstawić notatek w bazę danych z id które już istneje, to odbędzie się zamiana starego notatka na nowy
     void insert(Note note);
 
     @Update
