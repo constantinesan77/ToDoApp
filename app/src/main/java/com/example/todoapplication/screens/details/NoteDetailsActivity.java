@@ -18,7 +18,7 @@ import com.example.todoapplication.model.Note;
 
 public class NoteDetailsActivity extends AppCompatActivity {
     private static final String EXTRA_NOTE = "NoteDetailsActivity.EXTRA_NOTE";
-// Przeniesienie calego notatka przez Bundle
+// Przeniesienie całego Notatka przez Bundle
 
     Note note;
 
@@ -27,19 +27,19 @@ public class NoteDetailsActivity extends AppCompatActivity {
     public static void start(Activity caller, Note note) {
         Intent intent = new Intent(caller, NoteDetailsActivity.class);
         if (note != null) {
-            intent.putExtra(EXTRA_NOTE, note); // Jeżeli note nie rowno się 0 to dodamy note k Intentu
+            intent.putExtra(EXTRA_NOTE, note); // Jeżeli Note nie równo się 0, to dodamy Note k Intentu
         }
         caller.startActivity(intent);
     }
 
-// Wywolanie Activity
+// Wywołanie Activity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_details);
-        // Aplikacja czyta plik znacznikow i tworzy klasy z opisu
+        // Aplikacja czyta plik znaczników i tworzy klasy z opisu
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar); // Zrobilismy action bar
+        setSupportActionBar(toolbar); // Zrobiliśmy Action Bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Back Button
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -47,14 +47,14 @@ public class NoteDetailsActivity extends AppCompatActivity {
 
         editText = findViewById(R.id.text); // Wyciągamy EditText po ID
 
-        if (getIntent().hasExtra(EXTRA_NOTE)) { // getIntent - zwraca Intent ktory byl użuwany przy startowaniu w Activity
+        if (getIntent().hasExtra(EXTRA_NOTE)) { // getIntent - Zwraca Intent który był używany przy startowaniu w Activity
             note = getIntent().getParcelableExtra(EXTRA_NOTE);
             editText.setText(note.text);
         } else {
             note = new Note();
         }
 // Intent jest Parceble, wtedy możemy go wyciągnąc takim , jakim on jest
-// Jezeli Intent jest, wtedy ustawiamy text w srodku note`a , jak nie ma wtedy tworzymy nowy Note
+// Jeżeli Intent jest, wtedy ustawiamy text w srodku Note`a , jak nie ma, wtedy tworzymy nowy Note
 
     }
 
@@ -85,11 +85,11 @@ public class NoteDetailsActivity extends AppCompatActivity {
                 }
                 break;
         }
-// Patrzymy na ID przeciska ktory jest naciskany jezeli to przecisk Home, to zakończymy Activity
-// Jeżeli ActionSave, wtedy save note
-// Sprawdzamy czy user wpisal text, jeżeli nic nie wpisal, to przycisk nic nie robi
-// Jeżeli tworzymy nowy note wtedy trzeba ją wstawic, jeżeli stara to odswieżyc
-// Jeżeli jakis note przekazywal wtedy edytujemy note`a, jeżeli nie to tworzymy nowy notatek
+// Patrzymy na ID przyciska który jest naciskany, jezeli to przycisk Home, to zakończymy Activity
+// Jeżeli ActionSave, wtedy przechowywamy Notatek
+// Sprawdzamy czy user wpisal text, jeżeli nic nie wpisał, to przycisk nic nie robi
+// Jeżeli tworzymy nowy Notatek, wtedy trzeba go wstawic, jeżeli stary to odświeżyc
+// Jeżeli jakiś Notatek przekazywał wtedy edytujemy go, jeżeli nie to tworzymy nowy Notatek
         return super.onOptionsItemSelected(item);
     }
 }
